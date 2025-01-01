@@ -2,10 +2,12 @@
 #include "game.h"
 #include "mainmenu.h"
 #include "splashscreen.h"
+//#include "playerpaddle.h"
 
 // when game created, gameState uninit
 Game::GameState Game::gameState = Uninitialized;
 sf::RenderWindow Game::mainWindow;
+PlayerPaddle Game::player1;
 
 void Game::Start(void)
 {
@@ -13,6 +15,9 @@ void Game::Start(void)
         return;
 
     mainWindow.create(sf::VideoMode({1024, 768}, 32), "Pang!");
+
+    player1.Load("images/paddle.png");
+    player1.SetPosition((1024/2)-45, 700);
 
     gameState = Game::ShowingSplash;
 
@@ -56,13 +61,24 @@ void Game::GameLoop()
 
             case Game::Playing:
                 {
-                    mainWindow.clear(sf::Color(255,0,0));
+                    std::cout << "playing\n";
+
+                    mainWindow.clear(sf::Color(0,0,0));
+                    player1.Draw(mainWindow);
                     mainWindow.display();
 
                     //if(currentEvent.Type == sf::Event::Closed)
                     if(event->is<sf::Event::Closed>())
                     {
                         gameState = Game::Exiting;
+                    }
+
+                    if(event->is<sf::Event::KeyPressed>())
+                    {
+                        if(event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Escape)
+                        {
+                            ShowMenu();
+                        }
                     }
                     break;
                 }

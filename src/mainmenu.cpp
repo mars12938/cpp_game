@@ -69,7 +69,7 @@ MainMenu::MenuResult MainMenu::HandleClick(int x, int y)
         
         if(menuItemRect.contains({x, y}))
         {
-            std::cout<< "YESSSS";
+            std::cout<< "YESSSS\n";
             std::cout << (*it).action;
             return (*it).action;
         }

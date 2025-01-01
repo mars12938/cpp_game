@@ -1,5 +1,6 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include "playerpaddle.h"
 
 
 /*
@@ -9,6 +10,9 @@
  *
  *
  */
+
+class PlayerPaddle;
+
 class Game
 {
     // static methods can only access static members
@@ -33,7 +37,7 @@ class Game
         enum GameState { Uninitialized, ShowingSplash, Paused, ShowingMenu, Playing, Exiting };
 
         static GameState gameState;
-
         static sf::RenderWindow mainWindow;
+        static PlayerPaddle player1;
 };
 
